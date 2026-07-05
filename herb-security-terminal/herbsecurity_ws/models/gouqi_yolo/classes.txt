@@ -1,0 +1,2 @@
+gouqi_bad
+foreign_object

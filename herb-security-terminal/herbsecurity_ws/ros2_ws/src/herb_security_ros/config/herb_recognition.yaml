@@ -1,0 +1,24 @@
+herb_recognition_node:
+  ros__parameters:
+    model: "/home/mjn/herbsecurity_ws/models/herb_type/herb_type_mbv3_160_fp32.onnx"
+    classes: "/home/mjn/herbsecurity_ws/models/herb_type/classes.json"
+
+
+    camera: 22
+    width: 640
+    height: 480
+    camera_fps: 15
+
+    publish_fps: 15.0
+    infer_interval: 1.0
+
+    threads: 1
+    threshold: 0.75
+    img_size: 0
+
+    # ROI 只用于裁剪推理，不会在界面画框。
+    roi: "90,90,350,350"
+
+    vote_window: 3
+    vote_min_count: 2
+    jpeg_quality: 80

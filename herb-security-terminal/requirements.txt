@@ -1,0 +1,9 @@
+PyQt5
+opencv-python
+numpy
+onnxruntime
+paho-mqtt
+smbus2
+# K1 / SpaceMIT 专用包通常需要按官方环境安装：
+# spacemit_ort
+# gpiod / python3-libgpiod 可能需要系统包安装，而不是 pip

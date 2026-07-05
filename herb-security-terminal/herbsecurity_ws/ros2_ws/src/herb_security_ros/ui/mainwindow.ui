@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+
+  <property name="windowTitle">
+   <string>中药材称重识别与环境控制终端</string>
+  </property>
+
+  <property name="styleSheet">
+   <string notr="true">
+QMainWindow {
+    background-color: #07111F;
+}
+
+QWidget#centralwidget {
+    background-color: #07111F;
+    color: #DCE8F2;
+    font-family: "Microsoft YaHei";
+    font-size: 13px;
+}
+
+/* ================= 顶部状态栏 ================= */
+
+QFrame#top_bar {
+    background-color: #0B1B2B;
+    border: 1px solid #1F3B52;
+    border-radius: 4px;
+}
+
+QFrame#top_bar QLabel#label_sys_title {
+    color: #E7F3FF;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+QFrame#top_bar QLabel#label_time {
+    color: #8FA8BC;
+    font-size: 10px;
+}
+
+QFrame#top_bar QLabel[role="statusChip"] {
+    background-color: #123127;
+    border: 1px solid #2B6550;
+    border-radius: 6px;
+    color: #BFEAD7;
+    font-size: 10px;
+    font-weight: bold;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+QFrame#top_bar QLabel[role="statusChip"][alarm="true"] {
+    background-color: #3A2020;
+    border: 1px solid #734040;
+    border-radius: 6px;
+    color: #FFECEC;
+}
+
+QFrame#top_bar QLabel[role="statusChip"][warn="true"] {
+    background-color: #3A3020;
+    border: 1px solid #7A6540;
+    border-radius: 6px;
+    color: #FFF4E2;
+}
+
+/* ================= 主体三栏 ================= */
+
+QFrame#left_panel,
+QFrame#center_panel,
+QFrame#right_panel {
+    background-color: #0B1B2B;
+    border: 1px solid #24445C;
+    border-radius: 4px;
+}
+
+QFrame#left_panel QLabel#label_function_title,
+QFrame#right_panel QLabel#label_realtime_title,
+QFrame#right_panel QLabel#label_log_title,
+QFrame#center_panel QLabel[role="pageTitle"] {
+    color: #E7F3FF;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* ================= 左侧按钮：圆润工业风 ================= */
+
+QFrame#left_panel QPushButton {
+    background-color: #102235;
+    border: 1px solid #2E536D;
+    border-radius: 8px;
+    color: #EAF6FF;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 7px 8px;
+}
+
+QFrame#left_panel QPushButton:pressed {
+    background-color: #1B3B55;
+    border: 1px solid #3E6D8C;
+    border-radius: 8px;
+}
+
+QFrame#left_panel QPushButton#btn_lock_toggle {
+    background-color: #1D4E3A;
+    border: 1px solid #3B7A5F;
+    border-radius: 8px;
+    color: #E9FFF4;
+}
+
+QFrame#left_panel QPushButton#btn_exit_system {
+    background-color: #3A2020;
+    border: 1px solid #734040;
+    border-radius: 8px;
+    color: #FFECEC;
+}
+
+/* ================= 中心页面与卡片 ================= */
+
+QFrame#center_panel QStackedWidget#stacked_main_pages {
+    background-color: #0B1B2B;
+    border: none;
+}
+
+QFrame#center_panel QWidget[role="page"] {
+    background-color: #0B1B2B;
+}
+
+QFrame#center_panel QFrame[role="statusCard"],
+QFrame#center_panel QFrame[role="panelCard"] {
+    background-color: #081522;
+    border: 1px solid #1F3B52;
+    border-radius: 4px;
+}
+
+QFrame#center_panel QLabel[role="cardTitle"] {
+    color: #C9DCEA;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+QFrame#center_panel QLabel[role="fieldName"] {
+    color: #8FA8BC;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+QFrame#center_panel QLabel[role="fieldValue"] {
+    background-color: #102235;
+    border: 1px solid #1F3B52;
+    border-radius: 4px;
+    color: #EAF6FF;
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+QFrame#center_panel QLabel[role="bigValue"] {
+    background-color: #102235;
+    border: 1px solid #2E536D;
+    border-radius: 5px;
+    color: #EAF6FF;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+QFrame#center_panel QLabel[role="cameraView"] {
+    background-color: #030A12;
+    border: 1px solid #2E536D;
+    border-radius: 6px;
+    color: #536A7D;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+QFrame#center_panel QLabel#label_auth_status_value {
+    background-color: #3A3020;
+    border: 1px solid #7A6540;
+    border-radius: 4px;
+    color: #FFF4E2;
+}
+
+/* ================= 中间操作按钮：圆润 ================= */
+
+QFrame#center_panel QPushButton[role="mainAction"] {
+    background-color: #1D4E3A;
+    border: 1px solid #3B7A5F;
+    border-radius: 8px;
+    color: #E9FFF4;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 7px;
+}
+
+QFrame#center_panel QPushButton[role="dangerAction"] {
+    background-color: #3A2020;
+    border: 1px solid #734040;
+    border-radius: 8px;
+    color: #FFECEC;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 7px;
+}
+
+QFrame#center_panel QPushButton[role="subAction"] {
+    background-color: #102235;
+    border: 1px solid #2E536D;
+    border-radius: 8px;
+    color: #EAF6FF;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 6px;
+}
+
+QFrame#center_panel QPushButton:pressed {
+    background-color: #1B3B55;
+    border: 1px solid #3E6D8C;
+    border-radius: 8px;
+}
+
+QFrame#center_panel QPushButton:disabled {
+    background-color: #111A24;
+    border: 1px solid #273748;
+    border-radius: 8px;
+    color: #5E7182;
+}
+
+QFrame#center_panel QCheckBox {
+    color: #DCE8F2;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* ================= 表格 ================= */
+
+QFrame#center_panel QTableWidget {
+    background-color: #081522;
+    border: 1px solid #1F3B52;
+    border-radius: 4px;
+    color: #DCE8F2;
+    gridline-color: #1F3B52;
+    font-size: 12px;
+}
+
+QFrame#center_panel QHeaderView::section {
+    background-color: #102235;
+    color: #EAF6FF;
+    border: 1px solid #1F3B52;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ================= 右侧状态与日志 ================= */
+
+QFrame#right_panel QLabel#label_realtime_status_value {
+    background-color: #123127;
+    border: 1px solid #2B6550;
+    border-radius: 6px;
+    color: #BFEAD7;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+QFrame#right_panel QLabel#label_realtime_status_value[alarm="true"] {
+    background-color: #3A2020;
+    border: 1px solid #734040;
+    border-radius: 6px;
+    color: #FFECEC;
+}
+
+QFrame#right_panel QPlainTextEdit#plain_local_log {
+    background-color: #081522;
+    border: 1px solid #1F3B52;
+    border-radius: 4px;
+    color: #DCE8F2;
+    font-size: 12px;
+    padding: 5px;
+}
+
+QPlainTextEdit#plain_local_log QScrollBar:vertical,
+QPlainTextEdit#plain_local_log QScrollBar:horizontal {
+    width: 0px;
+    height: 0px;
+    background: transparent;
+}
+   </string>
+  </property>
+
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_main">
+    <property name="leftMargin"><number>8</number></property>
+    <property name="topMargin"><number>8</number></property>
+    <property name="rightMargin"><number>8</number></property>
+    <property name="bottomMargin"><number>8</number></property>
+    <property name="spacing"><number>8</number></property>
+
+    <!-- 顶部状态栏 -->
+    <item>
+     <widget class="QFrame" name="top_bar">
+      <property name="minimumSize"><size><width>0</width><height>52</height></size></property>
+      <property name="maximumSize"><size><width>16777215</width><height>52</height></size></property>
+
+      <layout class="QHBoxLayout" name="horizontalLayout_top">
+       <property name="leftMargin"><number>8</number></property>
+       <property name="topMargin"><number>5</number></property>
+       <property name="rightMargin"><number>8</number></property>
+       <property name="bottomMargin"><number>5</number></property>
+       <property name="spacing"><number>8</number></property>
+
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_title">
+         <property name="spacing"><number>2</number></property>
+
+         <item>
+          <widget class="QLabel" name="label_sys_title">
+           <property name="minimumSize"><size><width>170</width><height>25</height></size></property>
+           <property name="maximumSize"><size><width>170</width><height>25</height></size></property>
+           <property name="text"><string>中药称重环境终端</string></property>
+          </widget>
+         </item>
+
+         <item>
+          <widget class="QLabel" name="label_time">
+           <property name="minimumSize"><size><width>170</width><height>14</height></size></property>
+           <property name="maximumSize"><size><width>170</width><height>14</height></size></property>
+           <property name="text"><string>时间：--</string></property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_status_chips">
+         <property name="spacing"><number>4</number></property>
+
+         <item><widget class="QLabel" name="label_wifi_status"><property name="role" stdset="0"><string>statusChip</string></property><property name="alarm" stdset="0"><bool>false</bool></property><property name="warn" stdset="0"><bool>false</bool></property><property name="minimumSize"><size><width>64</width><height>30</height></size></property><property name="text"><string>WIFI 在线</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+         <item><widget class="QLabel" name="label_facecam_status"><property name="role" stdset="0"><string>statusChip</string></property><property name="alarm" stdset="0"><bool>false</bool></property><property name="warn" stdset="0"><bool>false</bool></property><property name="minimumSize"><size><width>64</width><height>30</height></size></property><property name="text"><string>人脸相机</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+         <item><widget class="QLabel" name="label_herbcam_status"><property name="role" stdset="0"><string>statusChip</string></property><property name="alarm" stdset="0"><bool>false</bool></property><property name="warn" stdset="0"><bool>false</bool></property><property name="minimumSize"><size><width>64</width><height>30</height></size></property><property name="text"><string>药草相机</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+         <item><widget class="QLabel" name="label_aht20_status"><property name="role" stdset="0"><string>statusChip</string></property><property name="alarm" stdset="0"><bool>false</bool></property><property name="warn" stdset="0"><bool>false</bool></property><property name="minimumSize"><size><width>64</width><height>30</height></size></property><property name="text"><string>AHT20 正常</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+         <item><widget class="QLabel" name="label_hx711_status"><property name="role" stdset="0"><string>statusChip</string></property><property name="alarm" stdset="0"><bool>false</bool></property><property name="warn" stdset="0"><bool>false</bool></property><property name="minimumSize"><size><width>64</width><height>30</height></size></property><property name="text"><string>HX711 正常</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+         <item><widget class="QLabel" name="label_gate_servo_status"><property name="role" stdset="0"><string>statusChip</string></property><property name="alarm" stdset="0"><bool>false</bool></property><property name="warn" stdset="0"><bool>true</bool></property><property name="minimumSize"><size><width>64</width><height>30</height></size></property><property name="text"><string>舵机 关闭</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+         <item><widget class="QLabel" name="label_fan_status"><property name="role" stdset="0"><string>statusChip</string></property><property name="alarm" stdset="0"><bool>false</bool></property><property name="warn" stdset="0"><bool>true</bool></property><property name="minimumSize"><size><width>64</width><height>30</height></size></property><property name="text"><string>风扇 待命</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+         <item><widget class="QLabel" name="label_alarm_status"><property name="role" stdset="0"><string>statusChip</string></property><property name="alarm" stdset="0"><bool>false</bool></property><property name="warn" stdset="0"><bool>true</bool></property><property name="minimumSize"><size><width>64</width><height>30</height></size></property><property name="text"><string>声光 待命</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- 主体区域 -->
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_body">
+      <property name="spacing"><number>8</number></property>
+
+      <!-- 左侧功能区 -->
+      <item>
+       <widget class="QFrame" name="left_panel">
+        <property name="minimumSize"><size><width>146</width><height>0</height></size></property>
+        <property name="maximumSize"><size><width>146</width><height>16777215</height></size></property>
+
+        <layout class="QVBoxLayout" name="verticalLayout_left">
+         <property name="leftMargin"><number>8</number></property>
+         <property name="topMargin"><number>8</number></property>
+         <property name="rightMargin"><number>8</number></property>
+         <property name="bottomMargin"><number>8</number></property>
+         <property name="spacing"><number>8</number></property>
+
+         <item>
+          <widget class="QLabel" name="label_function_title">
+           <property name="maximumSize"><size><width>16777215</width><height>24</height></size></property>
+           <property name="text"><string>功能区</string></property>
+           <property name="alignment"><set>Qt::AlignCenter</set></property>
+          </widget>
+         </item>
+
+         <item><widget class="QPushButton" name="btn_home_overview"><property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+ <horstretch>0</horstretch>
+ <verstretch>0</verstretch>
+</sizepolicy></property><property name="text"><string>首页总览</string></property></widget></item>
+         <item><widget class="QPushButton" name="btn_lock_toggle"><property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+ <horstretch>0</horstretch>
+ <verstretch>0</verstretch>
+</sizepolicy></property><property name="text"><string>登录认证</string></property></widget></item>
+         <item><widget class="QPushButton" name="btn_herb_inventory"><property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+ <horstretch>0</horstretch>
+ <verstretch>0</verstretch>
+</sizepolicy></property><property name="text"><string>药草出入库</string></property></widget></item>
+         <item><widget class="QPushButton" name="btn_env_control"><property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+ <horstretch>0</horstretch>
+ <verstretch>0</verstretch>
+</sizepolicy></property><property name="text"><string>环境控制</string></property></widget></item>
+         <item><widget class="QPushButton" name="btn_log_trace"><property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+ <horstretch>0</horstretch>
+ <verstretch>0</verstretch>
+</sizepolicy></property><property name="text"><string>日志追溯</string></property></widget></item>
+         <item><widget class="QPushButton" name="btn_admin_settings"><property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+ <horstretch>0</horstretch>
+ <verstretch>0</verstretch>
+</sizepolicy></property><property name="text"><string>管理设置</string></property></widget></item>
+         <item><widget class="QPushButton" name="btn_exit_system"><property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+ <horstretch>0</horstretch>
+ <verstretch>0</verstretch>
+</sizepolicy></property><property name="text"><string>退出系统</string></property></widget></item>
+
+        </layout>
+       </widget>
+      </item>
+
+      <!-- 中间页面区 -->
+      <item>
+       <widget class="QFrame" name="center_panel">
+        <layout class="QVBoxLayout" name="verticalLayout_center">
+         <property name="leftMargin"><number>8</number></property>
+         <property name="topMargin"><number>8</number></property>
+         <property name="rightMargin"><number>8</number></property>
+         <property name="bottomMargin"><number>8</number></property>
+         <property name="spacing"><number>8</number></property>
+
+         <item>
+          <widget class="QStackedWidget" name="stacked_main_pages">
+           <property name="currentIndex"><number>0</number></property>
+
+           <!-- 页面0：首页总览 -->
+           <widget class="QWidget" name="page_home">
+            <property name="role" stdset="0"><string>page</string></property>
+            <layout class="QVBoxLayout" name="verticalLayout_home">
+             <property name="leftMargin"><number>0</number></property>
+             <property name="topMargin"><number>0</number></property>
+             <property name="rightMargin"><number>0</number></property>
+             <property name="bottomMargin"><number>0</number></property>
+             <property name="spacing"><number>8</number></property>
+
+             <item>
+              <widget class="QLabel" name="label_home_title">
+               <property name="role" stdset="0"><string>pageTitle</string></property>
+               <property name="maximumSize"><size><width>16777215</width><height>24</height></size></property>
+               <property name="text"><string>首页总览</string></property>
+              </widget>
+             </item>
+
+             <item>
+              <layout class="QGridLayout" name="gridLayout_home_cards">
+               <property name="horizontalSpacing"><number>8</number></property>
+               <property name="verticalSpacing"><number>8</number></property>
+
+               <!-- 当前人员 -->
+               <item row="0" column="0">
+                <widget class="QFrame" name="card_user_status">
+                 <property name="role" stdset="0"><string>statusCard</string></property>
+                 <layout class="QGridLayout" name="gridLayout_user">
+                  <property name="leftMargin"><number>8</number></property>
+                  <property name="topMargin"><number>6</number></property>
+                  <property name="rightMargin"><number>8</number></property>
+                  <property name="bottomMargin"><number>6</number></property>
+                  <property name="horizontalSpacing"><number>6</number></property>
+                  <property name="verticalSpacing"><number>5</number></property>
+
+                  <item row="0" column="0" colspan="2"><widget class="QLabel" name="label_user_card_title"><property name="role" stdset="0"><string>cardTitle</string></property><property name="text"><string>当前人员</string></property></widget></item>
+                  <item row="1" column="0"><widget class="QLabel" name="label_user_name_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>人员</string></property></widget></item>
+                  <item row="1" column="1"><widget class="QLabel" name="label_user_name_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>未认证</string></property></widget></item>
+                  <item row="2" column="0"><widget class="QLabel" name="label_user_role_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>权限</string></property></widget></item>
+                  <item row="2" column="1"><widget class="QLabel" name="label_user_role_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>--</string></property></widget></item>
+                  <item row="3" column="0"><widget class="QLabel" name="label_auth_status_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>状态</string></property></widget></item>
+                  <item row="3" column="1"><widget class="QLabel" name="label_auth_status_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>锁定</string></property></widget></item>
+                  <item row="4" column="0"><widget class="QLabel" name="label_auth_time_left_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>剩余</string></property></widget></item>
+                  <item row="4" column="1"><widget class="QLabel" name="label_auth_time_left_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>--</string></property></widget></item>
+                 </layout>
+                </widget>
+               </item>
+
+               <!-- 药草出入库 -->
+               <item row="0" column="1">
+                <widget class="QFrame" name="card_herb_inventory_status">
+                 <property name="role" stdset="0"><string>statusCard</string></property>
+                 <layout class="QGridLayout" name="gridLayout_herb_inventory_status">
+                  <property name="leftMargin"><number>8</number></property>
+                  <property name="topMargin"><number>6</number></property>
+                  <property name="rightMargin"><number>8</number></property>
+                  <property name="bottomMargin"><number>6</number></property>
+                  <property name="horizontalSpacing"><number>6</number></property>
+                  <property name="verticalSpacing"><number>5</number></property>
+
+                  <item row="0" column="0" colspan="2"><widget class="QLabel" name="label_herb_inventory_card_title"><property name="role" stdset="0"><string>cardTitle</string></property><property name="text"><string>药草出入库</string></property></widget></item>
+                  <item row="1" column="0"><widget class="QLabel" name="label_current_herb_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>药草</string></property></widget></item>
+                  <item row="1" column="1"><widget class="QLabel" name="label_current_herb_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>--</string></property></widget></item>
+                  <item row="2" column="0"><widget class="QLabel" name="label_herb_confidence_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>置信</string></property></widget></item>
+                  <item row="2" column="1"><widget class="QLabel" name="label_herb_confidence_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>--</string></property></widget></item>
+                  <item row="3" column="0"><widget class="QLabel" name="label_current_weight_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>重量</string></property></widget></item>
+                  <item row="3" column="1"><widget class="QLabel" name="label_current_weight_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>0.0 g</string></property></widget></item>
+                  <item row="4" column="0"><widget class="QLabel" name="label_weight_stable_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>称重</string></property></widget></item>
+                  <item row="4" column="1"><widget class="QLabel" name="label_weight_stable_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>未稳定</string></property></widget></item>
+                 </layout>
+                </widget>
+               </item>
+
+               <!-- 库存告警 -->
+               <item row="1" column="0">
+                <widget class="QFrame" name="card_inventory_alarm">
+                 <property name="role" stdset="0"><string>statusCard</string></property>
+                 <layout class="QGridLayout" name="gridLayout_inventory_alarm">
+                  <property name="leftMargin"><number>8</number></property>
+                  <property name="topMargin"><number>6</number></property>
+                  <property name="rightMargin"><number>8</number></property>
+                  <property name="bottomMargin"><number>6</number></property>
+                  <property name="horizontalSpacing"><number>6</number></property>
+                  <property name="verticalSpacing"><number>5</number></property>
+
+                  <item row="0" column="0" colspan="2"><widget class="QLabel" name="label_inventory_alarm_card_title"><property name="role" stdset="0"><string>cardTitle</string></property><property name="text"><string>库存告警</string></property></widget></item>
+                  <item row="1" column="0"><widget class="QLabel" name="label_herb_kind_count_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>种类</string></property></widget></item>
+                  <item row="1" column="1"><widget class="QLabel" name="label_herb_kind_count_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>6</string></property></widget></item>
+                  <item row="2" column="0"><widget class="QLabel" name="label_low_stock_count_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>低库</string></property></widget></item>
+                  <item row="2" column="1"><widget class="QLabel" name="label_low_stock_count_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>0</string></property></widget></item>
+                  <item row="3" column="0"><widget class="QLabel" name="label_low_stock_items_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>品类</string></property></widget></item>
+                  <item row="3" column="1"><widget class="QLabel" name="label_low_stock_items_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>无</string></property></widget></item>
+                  <item row="4" column="0"><widget class="QLabel" name="label_last_stock_action_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>最近</string></property></widget></item>
+                  <item row="4" column="1"><widget class="QLabel" name="label_last_stock_action_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>--</string></property></widget></item>
+                 </layout>
+                </widget>
+               </item>
+
+               <!-- 环境控制 -->
+               <item row="1" column="1">
+                <widget class="QFrame" name="card_env_status">
+                 <property name="role" stdset="0"><string>statusCard</string></property>
+                 <layout class="QGridLayout" name="gridLayout_env_status">
+                  <property name="leftMargin"><number>8</number></property>
+                  <property name="topMargin"><number>6</number></property>
+                  <property name="rightMargin"><number>8</number></property>
+                  <property name="bottomMargin"><number>6</number></property>
+                  <property name="horizontalSpacing"><number>6</number></property>
+                  <property name="verticalSpacing"><number>5</number></property>
+
+                  <item row="0" column="0" colspan="2"><widget class="QLabel" name="label_env_card_title"><property name="role" stdset="0"><string>cardTitle</string></property><property name="text"><string>环境控制</string></property></widget></item>
+                  <item row="1" column="0"><widget class="QLabel" name="label_temperature_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>温度</string></property></widget></item>
+                  <item row="1" column="1"><widget class="QLabel" name="label_temperature_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>-- ℃</string></property></widget></item>
+                  <item row="2" column="0"><widget class="QLabel" name="label_humidity_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>湿度</string></property></widget></item>
+                  <item row="2" column="1"><widget class="QLabel" name="label_humidity_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>-- %</string></property></widget></item>
+                  <item row="3" column="0"><widget class="QLabel" name="label_control_advice_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>建议</string></property></widget></item>
+                  <item row="3" column="1"><widget class="QLabel" name="label_control_advice_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>保持</string></property></widget></item>
+                  <item row="4" column="0"><widget class="QLabel" name="label_gate_state_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>大门</string></property></widget></item>
+                  <item row="4" column="1"><widget class="QLabel" name="label_gate_state_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>关闭</string></property></widget></item>
+                 </layout>
+                </widget>
+               </item>
+
+              </layout>
+             </item>
+            </layout>
+           </widget>
+
+           <!-- 页面1：登录认证 -->
+           <widget class="QWidget" name="page_auth">
+            <property name="role" stdset="0"><string>page</string></property>
+            <layout class="QVBoxLayout" name="verticalLayout_auth">
+             <property name="leftMargin"><number>0</number></property>
+             <property name="topMargin"><number>0</number></property>
+             <property name="rightMargin"><number>0</number></property>
+             <property name="bottomMargin"><number>0</number></property>
+             <property name="spacing"><number>8</number></property>
+
+             <item><widget class="QLabel" name="label_auth_page_title"><property name="role" stdset="0"><string>pageTitle</string></property><property name="maximumSize"><size><width>16777215</width><height>24</height></size></property><property name="text"><string>登录认证 / 锁定控制</string></property></widget></item>
+
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_auth_body">
+               <property name="spacing"><number>8</number></property>
+
+               <item>
+                <widget class="QLabel" name="label_auth_camera_view">
+                 <property name="role" stdset="0"><string>cameraView</string></property>
+                 <property name="minimumSize"><size><width>230</width><height>0</height></size></property>
+                 <property name="text"><string>人脸摄像头画面</string></property>
+                 <property name="alignment"><set>Qt::AlignCenter</set></property>
+                </widget>
+               </item>
+
+               <item>
+                <widget class="QFrame" name="card_auth_result">
+                 <property name="role" stdset="0"><string>panelCard</string></property>
+                 <property name="minimumSize"><size><width>160</width><height>0</height></size></property>
+                 <layout class="QGridLayout" name="gridLayout_auth_result">
+                  <property name="leftMargin"><number>8</number></property>
+                  <property name="topMargin"><number>8</number></property>
+                  <property name="rightMargin"><number>8</number></property>
+                  <property name="bottomMargin"><number>8</number></property>
+                  <property name="horizontalSpacing"><number>6</number></property>
+                  <property name="verticalSpacing"><number>8</number></property>
+
+                  <item row="0" column="0" colspan="2"><widget class="QLabel" name="label_auth_result_title"><property name="role" stdset="0"><string>cardTitle</string></property><property name="text"><string>认证结果</string></property></widget></item>
+                  <item row="1" column="0"><widget class="QLabel" name="label_auth_result_name_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>人员</string></property></widget></item>
+                  <item row="1" column="1"><widget class="QLabel" name="label_auth_result_name_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>--</string></property></widget></item>
+                  <item row="2" column="0"><widget class="QLabel" name="label_auth_result_role_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>权限</string></property></widget></item>
+                  <item row="2" column="1"><widget class="QLabel" name="label_auth_result_role_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>--</string></property></widget></item>
+                  <item row="3" column="0"><widget class="QLabel" name="label_auth_result_score_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>分数</string></property></widget></item>
+                  <item row="3" column="1"><widget class="QLabel" name="label_auth_result_score_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>--</string></property></widget></item>
+                  <item row="4" column="0"><widget class="QLabel" name="label_auth_node_state_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>状态</string></property></widget></item>
+                  <item row="4" column="1"><widget class="QLabel" name="label_auth_node_state_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>锁定</string></property></widget></item>
+                  <item row="5" column="0" colspan="2"><widget class="QPushButton" name="btn_start_auth"><property name="role" stdset="0"><string>mainAction</string></property><property name="text"><string>开始认证</string></property></widget></item>
+                  <item row="6" column="0" colspan="2"><widget class="QPushButton" name="btn_logout_auth"><property name="role" stdset="0"><string>dangerAction</string></property><property name="text"><string>注销锁定</string></property></widget></item>
+                 </layout>
+                </widget>
+               </item>
+
+              </layout>
+             </item>
+            </layout>
+           </widget>
+
+           <!-- 页面2：药草出入库 -->
+           <widget class="QWidget" name="page_herb_inventory">
+            <property name="role" stdset="0"><string>page</string></property>
+            <layout class="QVBoxLayout" name="verticalLayout_herb_inventory">
+             <property name="leftMargin"><number>0</number></property>
+             <property name="topMargin"><number>0</number></property>
+             <property name="rightMargin"><number>0</number></property>
+             <property name="bottomMargin"><number>0</number></property>
+             <property name="spacing"><number>8</number></property>
+
+             <item><widget class="QLabel" name="label_herb_inventory_page_title"><property name="role" stdset="0"><string>pageTitle</string></property><property name="maximumSize"><size><width>16777215</width><height>24</height></size></property><property name="text"><string>药草识别与出入库确认</string></property></widget></item>
+
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_herb_top">
+               <property name="spacing"><number>8</number></property>
+
+               <item>
+                <widget class="QLabel" name="label_herb_camera_view">
+                 <property name="role" stdset="0"><string>cameraView</string></property>
+                 <property name="minimumSize"><size><width>220</width><height>116</height></size></property>
+                 <property name="maximumSize"><size><width>220</width><height>116</height></size></property>
+                 <property name="text"><string>药草摄像头画面</string></property>
+                 <property name="alignment"><set>Qt::AlignCenter</set></property>
+                </widget>
+               </item>
+
+               <item>
+                <widget class="QFrame" name="card_inventory_operation">
+                 <property name="role" stdset="0"><string>panelCard</string></property>
+                 <layout class="QGridLayout" name="gridLayout_inventory_operation">
+                  <property name="leftMargin"><number>8</number></property>
+                  <property name="topMargin"><number>8</number></property>
+                  <property name="rightMargin"><number>8</number></property>
+                  <property name="bottomMargin"><number>8</number></property>
+                  <property name="horizontalSpacing"><number>6</number></property>
+                  <property name="verticalSpacing"><number>6</number></property>
+
+                  <item row="0" column="0"><widget class="QLabel" name="label_page_herb_name_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>药草</string></property></widget></item>
+                  <item row="0" column="1"><widget class="QLabel" name="label_page_herb_name_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>--</string></property></widget></item>
+                  <item row="1" column="0"><widget class="QLabel" name="label_page_conf_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>置信</string></property></widget></item>
+                  <item row="1" column="1"><widget class="QLabel" name="label_page_conf_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>--</string></property></widget></item>
+                  <item row="2" column="0"><widget class="QLabel" name="label_page_weight_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>重量</string></property></widget></item>
+                  <item row="2" column="1"><widget class="QLabel" name="label_page_weight_value"><property name="role" stdset="0"><string>bigValue</string></property><property name="text"><string>0.0 g</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+                  <item row="3" column="0"><widget class="QLabel" name="label_page_stable_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>稳定</string></property></widget></item>
+                  <item row="3" column="1"><widget class="QLabel" name="label_page_stable_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>否</string></property></widget></item>
+                  <item row="4" column="0"><widget class="QPushButton" name="btn_stock_in"><property name="role" stdset="0"><string>mainAction</string></property><property name="text"><string>入库确认</string></property></widget></item>
+                  <item row="4" column="1"><widget class="QPushButton" name="btn_stock_out"><property name="role" stdset="0"><string>dangerAction</string></property><property name="text"><string>出库确认</string></property></widget></item>
+                 </layout>
+                </widget>
+               </item>
+
+              </layout>
+             </item>
+
+             <item>
+              <widget class="QTableWidget" name="table_inventory">
+               <property name="rowCount"><number>6</number></property>
+               <property name="columnCount"><number>4</number></property>
+               <property name="horizontalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+               <property name="verticalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+               <attribute name="horizontalHeaderStretchLastSection"><bool>true</bool></attribute>
+               <column><property name="text"><string>药草</string></property></column>
+               <column><property name="text"><string>库存/g</string></property></column>
+               <column><property name="text"><string>阈值/g</string></property></column>
+               <column><property name="text"><string>状态</string></property></column>
+              </widget>
+             </item>
+
+            </layout>
+           </widget>
+
+           <!-- 页面3：环境控制 -->
+           <widget class="QWidget" name="page_env_control">
+            <property name="role" stdset="0"><string>page</string></property>
+            <layout class="QVBoxLayout" name="verticalLayout_env_control">
+             <property name="leftMargin"><number>0</number></property>
+             <property name="topMargin"><number>0</number></property>
+             <property name="rightMargin"><number>0</number></property>
+             <property name="bottomMargin"><number>0</number></property>
+             <property name="spacing"><number>8</number></property>
+
+             <item><widget class="QLabel" name="label_env_page_title"><property name="role" stdset="0"><string>pageTitle</string></property><property name="maximumSize"><size><width>16777215</width><height>24</height></size></property><property name="text"><string>环境控制与大门舵机</string></property></widget></item>
+
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_env_body">
+               <property name="spacing"><number>8</number></property>
+
+               <item>
+                <widget class="QFrame" name="card_env_detail">
+                 <property name="role" stdset="0"><string>panelCard</string></property>
+                 <layout class="QGridLayout" name="gridLayout_env_detail">
+                  <property name="leftMargin"><number>10</number></property>
+                  <property name="topMargin"><number>10</number></property>
+                  <property name="rightMargin"><number>10</number></property>
+                  <property name="bottomMargin"><number>10</number></property>
+                  <property name="horizontalSpacing"><number>8</number></property>
+                  <property name="verticalSpacing"><number>8</number></property>
+
+                  <item row="0" column="0"><widget class="QLabel" name="label_env_page_temp_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>温度</string></property></widget></item>
+                  <item row="0" column="1"><widget class="QLabel" name="label_env_page_temp_value"><property name="role" stdset="0"><string>bigValue</string></property><property name="text"><string>-- ℃</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+                  <item row="1" column="0"><widget class="QLabel" name="label_env_page_hum_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>湿度</string></property></widget></item>
+                  <item row="1" column="1"><widget class="QLabel" name="label_env_page_hum_value"><property name="role" stdset="0"><string>bigValue</string></property><property name="text"><string>-- %</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+                  <item row="2" column="0"><widget class="QLabel" name="label_env_page_advice_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>建议</string></property></widget></item>
+                  <item row="2" column="1"><widget class="QLabel" name="label_env_page_advice_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>保持</string></property></widget></item>
+                  <item row="3" column="0"><widget class="QLabel" name="label_fan_output_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>风扇</string></property></widget></item>
+                  <item row="3" column="1"><widget class="QLabel" name="label_fan_output_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>待命</string></property></widget></item>
+                  <item row="4" column="0"><widget class="QLabel" name="label_alarm_output_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>声光</string></property></widget></item>
+                  <item row="4" column="1"><widget class="QLabel" name="label_alarm_output_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>待命</string></property></widget></item>
+                  <item row="5" column="0"><widget class="QLabel" name="label_gate_output_name"><property name="role" stdset="0"><string>fieldName</string></property><property name="text"><string>大门</string></property></widget></item>
+                  <item row="5" column="1"><widget class="QLabel" name="label_gate_output_value"><property name="role" stdset="0"><string>fieldValue</string></property><property name="text"><string>关闭</string></property></widget></item>
+                 </layout>
+                </widget>
+               </item>
+
+               <item>
+                <widget class="QFrame" name="card_env_actions">
+                 <property name="role" stdset="0"><string>panelCard</string></property>
+                 <property name="minimumSize"><size><width>170</width><height>0</height></size></property>
+                 <layout class="QGridLayout" name="gridLayout_env_actions">
+                  <property name="leftMargin"><number>10</number></property>
+                  <property name="topMargin"><number>10</number></property>
+                  <property name="rightMargin"><number>10</number></property>
+                  <property name="bottomMargin"><number>10</number></property>
+                  <property name="horizontalSpacing"><number>8</number></property>
+                  <property name="verticalSpacing"><number>8</number></property>
+
+                  <item row="0" column="0" colspan="2"><widget class="QLabel" name="label_env_action_title"><property name="role" stdset="0"><string>cardTitle</string></property><property name="text"><string>控制输出</string></property></widget></item>
+                  <item row="1" column="0"><widget class="QPushButton" name="btn_fan_start"><property name="role" stdset="0"><string>mainAction</string></property><property name="text"><string>风扇开</string></property></widget></item>
+                  <item row="1" column="1"><widget class="QPushButton" name="btn_fan_stop"><property name="role" stdset="0"><string>subAction</string></property><property name="text"><string>风扇停</string></property></widget></item>
+                  <item row="2" column="0"><widget class="QPushButton" name="btn_alarm_start"><property name="role" stdset="0"><string>dangerAction</string></property><property name="text"><string>声光启</string></property></widget></item>
+                  <item row="2" column="1"><widget class="QPushButton" name="btn_alarm_stop"><property name="role" stdset="0"><string>subAction</string></property><property name="text"><string>声光停</string></property></widget></item>
+                  <item row="3" column="0" colspan="2"><widget class="QCheckBox" name="check_gate_override"><property name="text"><string>管理员大门 Override</string></property></widget></item>
+                  <item row="4" column="0"><widget class="QPushButton" name="btn_gate_open"><property name="role" stdset="0"><string>mainAction</string></property><property name="text"><string>大门开</string></property></widget></item>
+                  <item row="4" column="1"><widget class="QPushButton" name="btn_gate_close"><property name="role" stdset="0"><string>dangerAction</string></property><property name="text"><string>大门关</string></property></widget></item>
+                 </layout>
+                </widget>
+               </item>
+
+              </layout>
+             </item>
+            </layout>
+           </widget>
+
+           <!-- 页面4：日志追溯 -->
+           <widget class="QWidget" name="page_logs">
+            <property name="role" stdset="0"><string>page</string></property>
+            <layout class="QVBoxLayout" name="verticalLayout_logs">
+             <property name="leftMargin"><number>0</number></property>
+             <property name="topMargin"><number>0</number></property>
+             <property name="rightMargin"><number>0</number></property>
+             <property name="bottomMargin"><number>0</number></property>
+             <property name="spacing"><number>8</number></property>
+
+             <item><widget class="QLabel" name="label_logs_page_title"><property name="role" stdset="0"><string>pageTitle</string></property><property name="maximumSize"><size><width>16777215</width><height>24</height></size></property><property name="text"><string>日志追溯</string></property></widget></item>
+
+             <item>
+              <widget class="QTableWidget" name="table_system_logs">
+               <property name="columnCount"><number>4</number></property>
+               <property name="horizontalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+               <property name="verticalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+               <attribute name="horizontalHeaderStretchLastSection"><bool>true</bool></attribute>
+               <column><property name="text"><string>时间</string></property></column>
+               <column><property name="text"><string>类型</string></property></column>
+               <column><property name="text"><string>人员</string></property></column>
+               <column><property name="text"><string>内容</string></property></column>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+
+           <!-- 页面5：管理设置 -->
+           <widget class="QWidget" name="page_admin">
+            <property name="role" stdset="0"><string>page</string></property>
+            <layout class="QVBoxLayout" name="verticalLayout_admin">
+             <property name="leftMargin"><number>0</number></property>
+             <property name="topMargin"><number>0</number></property>
+             <property name="rightMargin"><number>0</number></property>
+             <property name="bottomMargin"><number>0</number></property>
+             <property name="spacing"><number>8</number></property>
+
+             <item><widget class="QLabel" name="label_admin_page_title"><property name="role" stdset="0"><string>pageTitle</string></property><property name="maximumSize"><size><width>16777215</width><height>24</height></size></property><property name="text"><string>管理设置</string></property></widget></item>
+
+             <item>
+              <widget class="QFrame" name="card_admin_settings">
+               <property name="role" stdset="0"><string>panelCard</string></property>
+               <layout class="QGridLayout" name="gridLayout_admin">
+                <property name="leftMargin"><number>10</number></property>
+                <property name="topMargin"><number>10</number></property>
+                <property name="rightMargin"><number>10</number></property>
+                <property name="bottomMargin"><number>10</number></property>
+                <property name="horizontalSpacing"><number>8</number></property>
+                <property name="verticalSpacing"><number>8</number></property>
+
+                <item row="0" column="0"><widget class="QPushButton" name="btn_admin_add_user"><property name="role" stdset="0"><string>subAction</string></property><property name="text"><string>新增人员</string></property></widget></item>
+                <item row="0" column="1"><widget class="QPushButton" name="btn_admin_role"><property name="role" stdset="0"><string>subAction</string></property><property name="text"><string>权限管理</string></property></widget></item>
+                <item row="1" column="0"><widget class="QPushButton" name="btn_admin_inventory"><property name="role" stdset="0"><string>subAction</string></property><property name="text"><string>库存修正</string></property></widget></item>
+                <item row="1" column="1"><widget class="QPushButton" name="btn_admin_threshold"><property name="role" stdset="0"><string>subAction</string></property><property name="text"><string>阈值设置</string></property></widget></item>
+                <item row="2" column="0" colspan="2"><widget class="QLabel" name="label_admin_hint"><property name="role" stdset="0"><string>fieldValue</string></property><property name="minimumSize"><size><width>0</width><height>90</height></size></property><property name="text"><string>管理员可维护人员、权限、库存阈值与系统参数。</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+
+      <!-- 右侧状态日志 -->
+      <item>
+       <widget class="QFrame" name="right_panel">
+        <property name="minimumSize"><size><width>198</width><height>0</height></size></property>
+        <property name="maximumSize"><size><width>198</width><height>16777215</height></size></property>
+
+        <layout class="QVBoxLayout" name="verticalLayout_right">
+         <property name="leftMargin"><number>8</number></property>
+         <property name="topMargin"><number>8</number></property>
+         <property name="rightMargin"><number>8</number></property>
+         <property name="bottomMargin"><number>8</number></property>
+         <property name="spacing"><number>8</number></property>
+
+         <item><widget class="QLabel" name="label_realtime_title"><property name="maximumSize"><size><width>16777215</width><height>24</height></size></property><property name="text"><string>实时状态</string></property></widget></item>
+
+         <item>
+          <widget class="QLabel" name="label_realtime_status_value">
+           <property name="alarm" stdset="0"><bool>false</bool></property>
+           <property name="minimumSize"><size><width>0</width><height>52</height></size></property>
+           <property name="maximumSize"><size><width>16777215</width><height>52</height></size></property>
+           <property name="text"><string>系统锁定</string></property>
+           <property name="alignment"><set>Qt::AlignCenter</set></property>
+          </widget>
+         </item>
+
+         <item><widget class="QLabel" name="label_log_title"><property name="maximumSize"><size><width>16777215</width><height>24</height></size></property><property name="text"><string>本地日志</string></property></widget></item>
+
+         <item>
+          <widget class="QPlainTextEdit" name="plain_local_log">
+           <property name="readOnly"><bool>true</bool></property>
+           <property name="horizontalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+           <property name="verticalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+           <property name="plainText"><string>系统启动完成，当前处于锁定态。</string></property>
+          </widget>
+         </item>
+
+        </layout>
+       </widget>
+      </item>
+
+     </layout>
+    </item>
+
+   </layout>
+  </widget>
+ </widget>
+
+ <resources/>
+ <connections/>
+</ui>

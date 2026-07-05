@@ -1,0 +1,10 @@
+aht30_node:
+  ros__parameters:
+    bus_num: 3
+    address: 56       # 0x38 的十进制就是 56
+    period: 1.0
+
+    temp_high: 30.0
+    temp_low: 10.0
+    humidity_high: 70.0
+    humidity_low: 35.0

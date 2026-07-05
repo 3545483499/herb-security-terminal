@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginAuthWindow</class>
+
+ <widget class="QMainWindow" name="LoginAuthWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+
+  <property name="windowTitle">
+   <string>登录认证</string>
+  </property>
+
+  <property name="styleSheet">
+   <string notr="true">
+QMainWindow {
+    background-color: #07111F;
+}
+
+QWidget#centralwidget {
+    background-color: #07111F;
+    color: #DCE8F2;
+    font-family: "Microsoft YaHei";
+    font-size: 13px;
+}
+
+/* ================= 顶部栏 ================= */
+
+QFrame#top_bar {
+    background-color: #0B1B2B;
+    border: 1px solid #1F3B52;
+    border-radius: 5px;
+}
+
+QPushButton#btn_back {
+    background-color: #102235;
+    border: 1px solid #2E536D;
+    border-radius: 8px;
+    color: #EAF6FF;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QPushButton#btn_back:pressed {
+    background-color: #1B3B55;
+    border: 1px solid #3E6D8C;
+}
+
+QLabel#label_page_title {
+    color: #E7F3FF;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+QLabel#label_page_subtitle {
+    color: #8FA8BC;
+    font-size: 12px;
+}
+
+/* ================= 主体区域 ================= */
+
+QFrame#frame_camera_area,
+QFrame#frame_result_area {
+    background-color: #0B1B2B;
+    border: 1px solid #24445C;
+    border-radius: 6px;
+}
+
+QLabel[role="sectionTitle"] {
+    color: #E7F3FF;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+QLabel#label_camera_view {
+    background-color: #030A12;
+    border: 1px solid #2E536D;
+    border-radius: 8px;
+    color: #536A7D;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ================= 右侧认证卡 ================= */
+
+QLabel#label_auth_avatar {
+    background-color: #081522;
+    border: 1px solid #2E536D;
+    border-radius: 36px;
+    color: #536A7D;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+QLabel[role="infoLine"] {
+    background-color: #102235;
+    border: 1px solid #1F3B52;
+    border-radius: 6px;
+    color: #EAF6FF;
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+QLabel#label_auth_result_value {
+    background-color: #3A3020;
+    border: 1px solid #7A6540;
+    border-radius: 8px;
+    color: #FFF4E2;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+QLabel#label_auth_result_value[state="running"] {
+    background-color: #26344A;
+    border: 1px solid #3F5F86;
+    color: #DDEBFF;
+}
+
+QLabel#label_auth_result_value[state="success"] {
+    background-color: #123127;
+    border: 1px solid #2B6550;
+    color: #BFEAD7;
+}
+
+QLabel#label_auth_result_value[state="fail"] {
+    background-color: #3A2020;
+    border: 1px solid #734040;
+    color: #FFECEC;
+}
+
+QLabel#label_auth_guide_value {
+    background-color: #081522;
+    border: 1px solid #1F3B52;
+    border-radius: 6px;
+    color: #AFC1CF;
+    font-size: 12px;
+    padding: 6px;
+}
+
+/* 柔和备用入口 */
+QPushButton#btn_password_login {
+    background-color: #101E2C;
+    border: 1px solid #29435A;
+    border-radius: 10px;
+    color: #BFD3E2;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QPushButton#btn_password_login:pressed {
+    background-color: #182D40;
+    border: 1px solid #3B6684;
+    color: #EAF6FF;
+}
+   </string>
+  </property>
+
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_main">
+    <property name="leftMargin">
+     <number>8</number>
+    </property>
+    <property name="topMargin">
+     <number>8</number>
+    </property>
+    <property name="rightMargin">
+     <number>8</number>
+    </property>
+    <property name="bottomMargin">
+     <number>8</number>
+    </property>
+    <property name="spacing">
+     <number>8</number>
+    </property>
+
+    <!-- 顶部栏：只保留返回和标题，不再放重复认证状态 -->
+    <item>
+     <widget class="QFrame" name="top_bar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>52</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>52</height>
+       </size>
+      </property>
+
+      <layout class="QHBoxLayout" name="horizontalLayout_top">
+       <property name="leftMargin">
+        <number>8</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>8</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>10</number>
+       </property>
+
+       <item>
+        <widget class="QPushButton" name="btn_back">
+         <property name="minimumSize">
+          <size>
+           <width>88</width>
+           <height>34</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>88</width>
+           <height>34</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>返回</string>
+         </property>
+        </widget>
+       </item>
+
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_title">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+
+         <item>
+          <widget class="QLabel" name="label_page_title">
+           <property name="text">
+            <string>人脸登录认证</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+
+         <item>
+          <widget class="QLabel" name="label_page_subtitle">
+           <property name="text">
+            <string>本地人脸权限识别</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+       <item>
+        <spacer name="horizontalSpacer_top">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+
+      </layout>
+     </widget>
+    </item>
+
+    <!-- 主体区域 -->
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_body">
+      <property name="spacing">
+       <number>8</number>
+      </property>
+
+      <!-- 左侧摄像头区域 -->
+      <item>
+       <widget class="QFrame" name="frame_camera_area">
+        <layout class="QVBoxLayout" name="verticalLayout_camera_area">
+         <property name="leftMargin">
+          <number>10</number>
+         </property>
+         <property name="topMargin">
+          <number>10</number>
+         </property>
+         <property name="rightMargin">
+          <number>10</number>
+         </property>
+         <property name="bottomMargin">
+          <number>10</number>
+         </property>
+         <property name="spacing">
+          <number>8</number>
+         </property>
+
+         <item>
+          <widget class="QLabel" name="label_camera_title">
+           <property name="role" stdset="0">
+            <string>sectionTitle</string>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>实时人脸画面</string>
+           </property>
+          </widget>
+         </item>
+
+         <item>
+          <widget class="QLabel" name="label_camera_view">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>346</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>CAMERA PREVIEW</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+
+        </layout>
+       </widget>
+      </item>
+
+      <!-- 右侧认证信息：压缩版 -->
+      <item>
+       <widget class="QFrame" name="frame_result_area">
+        <property name="minimumSize">
+         <size>
+          <width>238</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>238</width>
+          <height>16777215</height>
+         </size>
+        </property>
+
+        <layout class="QVBoxLayout" name="verticalLayout_result">
+         <property name="leftMargin">
+          <number>10</number>
+         </property>
+         <property name="topMargin">
+          <number>10</number>
+         </property>
+         <property name="rightMargin">
+          <number>10</number>
+         </property>
+         <property name="bottomMargin">
+          <number>10</number>
+         </property>
+         <property name="spacing">
+          <number>8</number>
+         </property>
+
+         <!-- 标题 -->
+         <item>
+          <widget class="QLabel" name="label_result_title">
+           <property name="role" stdset="0">
+            <string>sectionTitle</string>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>认证信息</string>
+           </property>
+          </widget>
+         </item>
+
+         <!-- 头像 -->
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_avatar">
+           <item>
+            <spacer name="horizontalSpacer_avatar_left">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+
+           <item>
+            <widget class="QLabel" name="label_auth_avatar">
+             <property name="minimumSize">
+              <size>
+               <width>72</width>
+               <height>72</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>72</width>
+               <height>72</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>头像</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+
+           <item>
+            <spacer name="horizontalSpacer_avatar_right">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+
+         <!-- 姓名 -->
+         <item>
+          <widget class="QLabel" name="label_auth_name_value">
+           <property name="role" stdset="0">
+            <string>infoLine</string>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>姓名：--</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+
+         <!-- 权限 -->
+         <item>
+          <widget class="QLabel" name="label_auth_role_value">
+           <property name="role" stdset="0">
+            <string>infoLine</string>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>权限：--</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+
+         <!-- 认证结果 -->
+         <item>
+          <widget class="QLabel" name="label_auth_result_value">
+           <property name="state" stdset="0">
+            <string>idle</string>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>52</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>未认证</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+
+         <!-- 指引 -->
+         <item>
+          <widget class="QLabel" name="label_auth_guide_value">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>44</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>请注视摄像头，保持面部在画面中央。</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+
+         <item>
+          <spacer name="verticalSpacer_result">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>8</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+
+         <!-- 密码登录 -->
+         <item>
+          <widget class="QPushButton" name="btn_password_login">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>密码登录</string>
+           </property>
+          </widget>
+         </item>
+
+        </layout>
+       </widget>
+      </item>
+
+     </layout>
+    </item>
+
+   </layout>
+  </widget>
+ </widget>
+
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,17 @@
+login_auth_node:
+  ros__parameters:
+    cam_index: 20
+
+    threshold: 0.35
+    infer_interval: 0.20
+    frame_fps: 12.0
+    result_interval: 1.0
+
+    require_pass_frames: 2
+    result_hold_time: 1.0
+
+    threads: 4
+
+    det_model: "/home/mjn/herbsecurity_ws/models/buffalo_s/det_500m.onnx"
+    rec_model: "/home/mjn/herbsecurity_ws/models/buffalo_s/w600k_mbf.onnx"
+    db_path: "/home/mjn/herbsecurity_ws/face_data/face_database.npz"

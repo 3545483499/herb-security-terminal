@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+
+  <property name="windowTitle">
+   <string>药草出入库</string>
+  </property>
+
+  <property name="styleSheet">
+   <string notr="true">
+QWidget#Form {
+    background-color: #07111F;
+    color: #DCE8F2;
+    font-family: "Microsoft YaHei";
+    font-size: 13px;
+}
+
+/* ================= 顶部栏 ================= */
+
+QFrame#top_bar {
+    background-color: #0B1B2B;
+    border: 1px solid #1F3B52;
+    border-radius: 5px;
+}
+
+QPushButton#btn_back {
+    background-color: #102235;
+    border: 1px solid #2E536D;
+    border-radius: 8px;
+    color: #EAF6FF;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QPushButton#btn_back:pressed {
+    background-color: #1B3B55;
+    border: 1px solid #3E6D8C;
+}
+
+QLabel#label_page_title {
+    color: #E7F3FF;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+QLabel#label_page_subtitle {
+    color: #8FA8BC;
+    font-size: 12px;
+}
+
+/* ================= 主体卡片 ================= */
+
+QFrame#frame_camera_area,
+QFrame#frame_operation_area,
+QFrame#frame_inventory_area {
+    background-color: #0B1B2B;
+    border: 1px solid #24445C;
+    border-radius: 6px;
+}
+
+QLabel[role="sectionTitle"] {
+    color: #E7F3FF;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+QLabel[role="fieldName"] {
+    color: #8FA8BC;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+QLabel[role="fieldValue"] {
+    background-color: #102235;
+    border: 1px solid #1F3B52;
+    border-radius: 6px;
+    color: #EAF6FF;
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+QLabel#label_camera_view {
+    background-color: #030A12;
+    border: 1px solid #2E536D;
+    border-radius: 8px;
+    color: #536A7D;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* 重量改成普通信息项，不再做大号主视觉 */
+QLabel#label_weight_value {
+    background-color: #102235;
+    border: 1px solid #1F3B52;
+    border-radius: 6px;
+    color: #EAF6FF;
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+QLabel#label_stable_value {
+    background-color: #3A3020;
+    border: 1px solid #7A6540;
+    border-radius: 6px;
+    color: #FFF4E2;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QLabel#label_stable_value[state="stable"] {
+    background-color: #123127;
+    border: 1px solid #2B6550;
+    color: #BFEAD7;
+}
+
+QLabel#label_stable_value[state="unstable"] {
+    background-color: #3A3020;
+    border: 1px solid #7A6540;
+    color: #FFF4E2;
+}
+
+/* ================= 出入库按钮：对等关系 ================= */
+
+QPushButton#btn_stock_out {
+    background-color: #3A2020;
+    border: 1px solid #734040;
+    border-radius: 10px;
+    color: #FFECEC;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+QPushButton#btn_stock_out:pressed {
+    background-color: #502A2A;
+}
+
+QPushButton#btn_stock_in {
+    background-color: #1D4E3A;
+    border: 1px solid #3B7A5F;
+    border-radius: 10px;
+    color: #E9FFF4;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+QPushButton#btn_stock_in:pressed {
+    background-color: #276849;
+}
+
+QPushButton:disabled {
+    background-color: #111A24;
+    border: 1px solid #273748;
+    border-radius: 10px;
+    color: #5E7182;
+}
+
+/* ================= 库存表格 ================= */
+
+QTableWidget#table_inventory {
+    background-color: #081522;
+    border: 1px solid #1F3B52;
+    border-radius: 4px;
+    color: #DCE8F2;
+    gridline-color: #1F3B52;
+    font-size: 12px;
+}
+
+QTableWidget#table_inventory::item {
+    padding: 4px;
+}
+
+QHeaderView::section {
+    background-color: #102235;
+    color: #EAF6FF;
+    border: 1px solid #1F3B52;
+    font-size: 12px;
+    font-weight: bold;
+}
+   </string>
+  </property>
+
+  <layout class="QVBoxLayout" name="verticalLayout_main">
+   <property name="leftMargin"><number>8</number></property>
+   <property name="topMargin"><number>8</number></property>
+   <property name="rightMargin"><number>8</number></property>
+   <property name="bottomMargin"><number>8</number></property>
+   <property name="spacing"><number>8</number></property>
+
+   <!-- 顶部栏 -->
+   <item>
+    <widget class="QFrame" name="top_bar">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>52</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>52</height>
+      </size>
+     </property>
+
+     <layout class="QHBoxLayout" name="horizontalLayout_top">
+      <property name="leftMargin"><number>8</number></property>
+      <property name="topMargin"><number>6</number></property>
+      <property name="rightMargin"><number>8</number></property>
+      <property name="bottomMargin"><number>6</number></property>
+      <property name="spacing"><number>10</number></property>
+
+      <item>
+       <widget class="QPushButton" name="btn_back">
+        <property name="minimumSize">
+         <size>
+          <width>88</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>88</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>返回</string>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_title">
+        <property name="spacing"><number>0</number></property>
+
+        <item>
+         <widget class="QLabel" name="label_page_title">
+          <property name="text">
+           <string>药草出入库</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QLabel" name="label_page_subtitle">
+          <property name="text">
+           <string>药草识别、称重确认、库存更新</string>
+          </property>
+         </widget>
+        </item>
+
+       </layout>
+      </item>
+
+      <item>
+       <spacer name="horizontalSpacer_top">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+
+     </layout>
+    </widget>
+   </item>
+
+   <!-- 主体区域 -->
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_body">
+     <property name="spacing"><number>8</number></property>
+
+     <!-- 左侧：摄像头识别画面 -->
+     <item>
+      <widget class="QFrame" name="frame_camera_area">
+       <property name="minimumSize">
+        <size>
+         <width>330</width>
+         <height>0</height>
+        </size>
+       </property>
+
+       <layout class="QVBoxLayout" name="verticalLayout_camera">
+        <property name="leftMargin"><number>10</number></property>
+        <property name="topMargin"><number>10</number></property>
+        <property name="rightMargin"><number>10</number></property>
+        <property name="bottomMargin"><number>10</number></property>
+        <property name="spacing"><number>8</number></property>
+
+        <item>
+         <widget class="QLabel" name="label_camera_title">
+          <property name="role" stdset="0">
+           <string>sectionTitle</string>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>摄像头识别画面</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QLabel" name="label_camera_view">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>330</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>CAMERA PREVIEW</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+
+       </layout>
+      </widget>
+     </item>
+
+     <!-- 中间：识别、称重、出入库 -->
+     <item>
+      <widget class="QFrame" name="frame_operation_area">
+       <property name="minimumSize">
+        <size>
+         <width>215</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+
+       <layout class="QGridLayout" name="gridLayout_operation">
+        <property name="leftMargin"><number>10</number></property>
+        <property name="topMargin"><number>10</number></property>
+        <property name="rightMargin"><number>10</number></property>
+        <property name="bottomMargin"><number>10</number></property>
+        <property name="horizontalSpacing"><number>8</number></property>
+        <property name="verticalSpacing"><number>9</number></property>
+
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label_operation_title">
+          <property name="role" stdset="0">
+           <string>sectionTitle</string>
+          </property>
+          <property name="text">
+           <string>识别与称重</string>
+          </property>
+         </widget>
+        </item>
+
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_herb_type_name">
+          <property name="role" stdset="0">
+           <string>fieldName</string>
+          </property>
+          <property name="text">
+           <string>种类</string>
+          </property>
+         </widget>
+        </item>
+
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_herb_type_value">
+          <property name="role" stdset="0">
+           <string>fieldValue</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>34</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>--</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_confidence_name">
+          <property name="role" stdset="0">
+           <string>fieldName</string>
+          </property>
+          <property name="text">
+           <string>置信</string>
+          </property>
+         </widget>
+        </item>
+
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_confidence_value">
+          <property name="role" stdset="0">
+           <string>fieldValue</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>34</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>--</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_weight_name">
+          <property name="role" stdset="0">
+           <string>fieldName</string>
+          </property>
+          <property name="text">
+           <string>重量</string>
+          </property>
+         </widget>
+        </item>
+
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_weight_value">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>34</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>0.0 g</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_stable_name">
+          <property name="role" stdset="0">
+           <string>fieldName</string>
+          </property>
+          <property name="text">
+           <string>稳定</string>
+          </property>
+         </widget>
+        </item>
+
+        <item row="4" column="1">
+         <widget class="QLabel" name="label_stable_value">
+          <property name="state" stdset="0">
+           <string>unstable</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>34</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>未稳定</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+
+        <item row="5" column="0" colspan="2">
+         <spacer name="verticalSpacer_operation">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>60</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+
+        <!-- 出库/入库：同一行，对等按钮 -->
+        <item row="6" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_stock_buttons">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+
+          <item>
+           <widget class="QPushButton" name="btn_stock_out">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>48</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>出库确认</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_stock_in">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>48</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>入库确认</string>
+            </property>
+           </widget>
+          </item>
+
+         </layout>
+        </item>
+
+       </layout>
+      </widget>
+     </item>
+
+     <!-- 右侧：当前药房库存 -->
+     <item>
+      <widget class="QFrame" name="frame_inventory_area">
+       <property name="minimumSize">
+        <size>
+         <width>225</width>
+         <height>0</height>
+        </size>
+       </property>
+
+       <layout class="QVBoxLayout" name="verticalLayout_inventory">
+        <property name="leftMargin"><number>10</number></property>
+        <property name="topMargin"><number>10</number></property>
+        <property name="rightMargin"><number>10</number></property>
+        <property name="bottomMargin"><number>10</number></property>
+        <property name="spacing"><number>8</number></property>
+
+        <item>
+         <widget class="QLabel" name="label_inventory_title">
+          <property name="role" stdset="0">
+           <string>sectionTitle</string>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>当前药房库存</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QTableWidget" name="table_inventory">
+          <property name="rowCount">
+           <number>6</number>
+          </property>
+          <property name="columnCount">
+           <number>3</number>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::NoSelection</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+
+          <column>
+           <property name="text">
+            <string>药草</string>
+           </property>
+          </column>
+
+          <column>
+           <property name="text">
+            <string>库存/g</string>
+           </property>
+          </column>
+
+          <column>
+           <property name="text">
+            <string>状态</string>
+           </property>
+          </column>
+
+         </widget>
+        </item>
+
+       </layout>
+      </widget>
+     </item>
+
+    </layout>
+   </item>
+
+  </layout>
+ </widget>
+
+ <resources/>
+ <connections/>
+</ui>

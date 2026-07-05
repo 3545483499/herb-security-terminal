@@ -1,0 +1,23 @@
+{
+    "model_name": "mobilenet_v3_small",
+    "img_size": 160,
+    "classes": [
+        "gancao",
+        "gouqi",
+        "huangqi",
+        "jinyinhua",
+        "juhua",
+        "kongpan",
+        "yiyiren"
+    ],
+    "label_cn": {
+        "gancao": "甘草",
+        "gouqi": "枸杞",
+        "huangqi": "黄芪",
+        "jinyinhua": "金银花",
+        "juhua": "菊花",
+        "kongpan": "空盘",
+        "yiyiren": "薏苡仁"
+    },
+    "note": "classes 的顺序必须和模型输出顺序一致，推理时必须读取本文件"
+}

@@ -1,0 +1,41 @@
+aws_iot_bridge:
+  ros__parameters:
+
+    # ========================================
+    # AWS IoT Core 连接参数
+    # ========================================
+
+    # AWS IoT endpoint（在 AWS Console → IoT Core → Settings 查看）
+    # 格式：xxx-ats.iot.ap-southeast-2.amazonaws.com
+    endpoint: ""
+
+    # MQTT client_id，按需修改
+    client_id: "K1_HerbRobot"
+
+    # 证书目录（绝对路径或相对路径）
+    cert_dir: "/home/mjn/herbsecurity_ws/aws_iot/certs"
+
+    # 证书文件名
+    ca_file:   "AmazonRootCA1.pem"
+    cert_file: "device.pem.crt"
+    key_file:  "private.pem.key"
+
+    # MQTT 端口
+    port: 8883
+
+    # ========================================
+    # Topic 配置
+    # ========================================
+
+    # 云端 → 设备 命令 topic
+    cloud_cmd_topic: "herb_robot/cloud/cmd"
+
+    # 设备 → 云端 遥测 topic
+    telemetry_topic: "herb_robot/telemetry"
+
+    # ========================================
+    # 连接策略
+    # ========================================
+
+    reconnect_delay: 5.0   # 断线重连间隔（秒）
+    keepalive: 30          # MQTT keepalive（秒）
