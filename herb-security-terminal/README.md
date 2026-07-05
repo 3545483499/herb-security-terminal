@@ -1,4 +1,4 @@
-# Herb Security Terminal / 中药材识别与仓储终端
+# Herb Security Terminal / 中药材识别与储藏终端
 
 本仓库用于保存 **MUSE Pi Pro / K1** 端中药材识别、登录认证、温湿度采集、云端通信和主界面程序。代码主体是 ROS 2 Python 包 `herb_security_ros`。
 
